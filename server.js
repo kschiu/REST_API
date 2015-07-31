@@ -5,11 +5,15 @@
 var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
-
+var mongoose   = require('mongoose');
+var Bear       = require('../app/models/bear')
 // configure app to use bodyParser() to
 // get the data from a POST
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+//Connect to remote DB in tutorial
+mongoose.connect('mongodb://node:node@novus.modulusmongo.net:27017/Iganiq8o');
 
 var port = process.env.PORT || 8080;        // set our port
 
