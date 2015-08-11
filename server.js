@@ -37,16 +37,29 @@ router.get('/', function(req, res) {
 router.route('/bears')
 
 	.post(function(req, res){
+		console.log("post req");
 		var bear = new Bear();
-		bear.name = req.body.name; //pull name from post body
-
-		bear.save(function(err){
-			if (err){
+		bear.name = req.body.name; //name from post body
+		console.log(req.body.name);
+		res.json(bear);
+		bear.save(function(err) {
+			if (err)
 				res.send(err); //tell response to send error
-			}
 
 			res.json({ message: 'Bear with name was made successfully' });
 		});
+
+	})
+
+	.get(function(req, res){
+		console.log("get req");
+		Bear.find(function(err, bears){
+			if (err)
+				res.send(err);
+
+			res.json(bears);
+		});
+
 	});
 
 // REGISTER OUR ROUTES -------------------------------
