@@ -34,6 +34,20 @@ router.get('/', function(req, res) {
     res.json({ message: 'Hello World API' });   
 });
 
+router.route('/bears')
+
+	.post(function(req, res){
+		var bear = new Bear();
+		bear.name = req.body.name; //pull name from post body
+
+		bear.save(function(err){
+			if (err){
+				res.send(err); //tell response to send error
+			}
+
+			res.json({ message: 'Bear with name was made successfully' });
+		});
+	});
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
